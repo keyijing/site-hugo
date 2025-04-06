@@ -1,0 +1,24 @@
+{{ define "main" }}
+
+{{ $taxonomy := index site.Taxonomies .Data.Plural }}
+{{ $view := .Params.view | default "card" }}
+{{ $block := . }}
+
+<div class="mx-auto flex max-w-screen-xl">
+  {{ partial "components/sidebar-taxonomy" (dict "taxonomy" $taxonomy "page_url" .RelPermalink "no_sidebar" false) }}
+  <div class="w-full min-w-0 min-h-[calc(100vh-var(--navbar-height))] justify-center break-words pb-8 pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+
+    {{ partial "functions/render_view" (dict "fragment" "start" "page" $block "item" . "view" $view) }}
+
+    {{ $paginator := .Paginate .Pages.ByDate.Reverse }}
+    {{ range $index, $item := $paginator.Pages }}
+    {{ partial "functions/render_view" (dict "page" . "item" . "view" $view "index" $index) }}
+    {{end}}
+
+    {{ partial "functions/render_view" (dict "fragment" "end" "page" $block "item" . "view" $view) }}
+
+    {{ partial "components/paginator" . }}
+
+  </div>
+</div>
+{{ end }}

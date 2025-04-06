@@ -1,0 +1,39 @@
+html {
+  scroll-behavior: smooth;
+}
+
+#table-of-contents li:hover > a {
+  border-left: 1px solid rgb(var(--color-neutral-600));
+}
+
+#table-of-contents li.active:not(:has(li.active)) > a {
+  color: rgb(var(--color-primary-600));
+  border-left: 2px solid rgb(var(--color-primary-600));
+}
+
+html.dark #table-of-contents li:hover > a {
+  border-left: 1px solid rgb(var(--color-neutral-400));
+}
+
+html.dark #table-of-contents li.active:not(:has(li.active)) > a {
+  color: rgb(var(--color-primary-400));
+  border-left: 2px solid rgb(var(--color-primary-400));
+}
+
+#table-of-contents li > a + ul {
+  display: none;
+}
+
+#table-of-contents li.active > ul,
+#table-of-contents li:hover > ul {
+  display: inherit;
+}
+
+.footer-license-icons {
+  text-align: center;
+}
+
+.prose {
+  color: var(--tw-prose-body);
+  max-width: fit-content;
+}
